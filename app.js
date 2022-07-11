@@ -13,6 +13,13 @@ async function handlePageLoad() {
     display();
 }
 
+async function handleAddPlayer(player, team) {
+    const playerToAdd = await addPlayer(player.name, team.id);
+
+    team = team.id;
+    team.players.push(playerToAdd);
+}
+
 async function handleSignOut() {
     signOut();
 }

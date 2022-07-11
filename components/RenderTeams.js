@@ -1,4 +1,26 @@
-function Team({ team }) {
+
+export function renderTeams(
+    container,
+    {
+        handleAddPlayer,
+        handleRemovePlayer
+    }
+) {
+    return ({ teams }) => {
+        container.innerHTML = '';
+
+        for (const team of teams) {
+            const item = Team({
+                team,
+                handleAddPlayer,
+                handleRemovePlayer,
+            });
+            container.append(item);
+        }
+    };
+}
+
+function Team({ team, handleAddPlayer, handleRemovePlayer }) {
     const li = document.createElement('li');
     li.classList.add('team-container');
 
