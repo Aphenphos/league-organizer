@@ -1,11 +1,11 @@
-import client from './client.js';
+import { client } from './client.js';
 
 export async function getTeams() {
     const response = await client
         .from('team-table')
         .select(`
             id,
-            name,
+            name
         `);
 
     return response;
@@ -17,18 +17,18 @@ export async function getPlayers() {
         .select(`
             id,
             name,
-            team_id,
+            team_id
         `);
 
     return response;
 }
 
-export async function addPlayer(playerName, teamName) {
+export async function addPlayer(player, team) {
     const response = await client
         .from('team-table')
         .insert({
-            name: playerName,
-            team_id: teamName
+            name: player,
+            team_id: team
         })
         .single();
 

@@ -18,7 +18,7 @@ function Player({ player }) {
     name.textContent = player.name;
 
     const team = document.createElement('td');
-    team.textContent = player.name;
+    team.textContent = player.team.name;
     
 
     tablePlayerName.append(name, team);

@@ -1,24 +1,4 @@
 
-export function renderTeams(
-    container,
-    {
-        handleAddPlayer,
-        handleRemovePlayer
-    }
-) {
-    return ({ teams }) => {
-        container.innerHTML = '';
-
-        for (const team of teams) {
-            const item = Team({
-                team,
-                handleAddPlayer,
-                handleRemovePlayer,
-            });
-            container.append(item);
-        }
-    };
-}
 
 function Team({ team, handleAddPlayer, handleRemovePlayer }) {
     const li = document.createElement('li');
@@ -73,4 +53,25 @@ function AddPlayer({ team, handleAddPlayer }) {
         await handleAddPlayer(input.value, team.id);
         form.reset;
     });
+}
+
+
+export function renderTeams(root,
+    {
+        handleAddPlayer,
+        handleRemovePlayer
+    }) {
+
+    return ({ teams }) => {
+        root.innerHTML = '';
+
+        for (const team of teams) {
+            const item = Team({
+                team,
+                handleAddPlayer,
+                handleRemovePlayer,
+            });
+            root.append(item);
+        }
+    };
 }
