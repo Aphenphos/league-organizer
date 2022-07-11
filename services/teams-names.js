@@ -8,7 +8,21 @@ export async function getTeams() {
             name
         `);
 
-    return response;
+    return response.data;
+}
+
+export async function getTeamsWithPlayers() {
+    const response = await client
+        .from('team-table')
+        .select(`
+            id,
+            name,
+            players:player-table(
+                name,
+                id:playerID
+            )
+        `);
+    return response.data;
 }
 
 export async function getPlayers() {
@@ -20,19 +34,20 @@ export async function getPlayers() {
             team_id
         `);
 
-    return response;
+    return response.data;
+
 }
 
 export async function addPlayer(player, team) {
     const response = await client
         .from('team-table')
         .insert({
-            name: player,
+            name: player.name,
             team_id: team
         })
         .single();
 
-    return response;
+    return response.data;
 }
 
 export async function removePlayer(playerName) {
@@ -42,9 +57,5 @@ export async function removePlayer(playerName) {
         .eq('id', playerName)
         .single();
 
-    return response;
+    return response.data;
 }
-
-//addPlayer removePlayer
-
-//getPlayersWithTeams

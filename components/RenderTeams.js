@@ -72,6 +72,8 @@ export function renderTeams(root,
                 handleRemovePlayer,
             });
             root.append(item);
+            console.log(team[teams]);
+
         }
     };
 }

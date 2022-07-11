@@ -14,6 +14,7 @@ async function handlePageLoad() {
     protectPage(user);
 
     teams = await getTeams();
+    console.log(teams);
 
     display();
 }
