@@ -40,3 +40,9 @@ form {
     width: 100%;
     text-align: center;
 }
+
+#new-team-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
