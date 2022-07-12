@@ -7,15 +7,17 @@ function Team({ team, handleAddPlayer, handleRemovePlayer }) {
 
     const h1 = document.createElement('h1');
     h1.textContent = team.name;
+    h1.classList.add('team-name');
+
     const ul = document.createElement('ul');
     ul.classList.add('team-player');
     const form = AddPlayer({ team, handleAddPlayer });
     for (const player of team.players) {
         const P = Player({ player, handleRemovePlayer });
         ul.append(P);
-        li.append(h1, ul, form);
     }
-
+    
+    li.append(h1, ul, form);
     return li;
 }
 
@@ -25,6 +27,7 @@ function Player({ player, handleRemovePlayer }) {
 
     const h1 = document.createElement('h1');
     h1.textContent = player.name;
+    h1.classList.add('player-name');
 
     const button = document.createElement('button');
     button.classList.add('deletePlayer');
@@ -40,13 +43,15 @@ function Player({ player, handleRemovePlayer }) {
 
 function AddPlayer({ team, handleAddPlayer }) {
     const form = document.createElement('form');
+    form.classList.add('input-form');
     
     const input = document.createElement('input');
     input.required = true;
     input.type = 'text';
     input.title = `Add a new player to ${team.name}`;
     input.name = 'new-player-name';
-    input.placeholder = 'Player Name';
+    input.placeholder = 'New Player Name';
+    input.classList.add('text-input');
 
     form.append(input);
 

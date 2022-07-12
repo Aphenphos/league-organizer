@@ -19,6 +19,8 @@ function Player({ player }) {
 
     const team = document.createElement('td');
     team.textContent = player.teams_id;
+
+    //main page is working.
     console.log(player.team_id);
 
     // you good
