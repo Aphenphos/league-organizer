@@ -51,11 +51,11 @@ export async function addPlayer(player, team) {
     return response.data;
 }
 
-export async function removePlayer(playerName) {
+export async function removePlayer(player) {
     const response = await client
-        .from('team-table')
+        .from('player-table')
         .delete()
-        .eq('id', playerName)
+        .eq('id', player)
         .single();
 
     return response.data;

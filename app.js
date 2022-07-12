@@ -1,5 +1,5 @@
 import { getUser, signOut } from './services/auth-service.js';
-import { protectPage } from './utils.js';
+import { findById, protectPage } from './utils.js';
 import createUser from './components/User.js';
 import { addPlayer, getTeams, getTeamsWithPlayers, removePlayer } from './services/teams-names.js';
 import { renderTeams } from './components/RenderTeams.js';
@@ -29,15 +29,13 @@ async function handleAddPlayer(player, team) {
 async function handleRemovePlayer(player) {
     await removePlayer(player.id);
 
-    const team = player.team_id;
+    const team = (player.team_id);
 
-    const index = team.players.indexOf(player);
-
+    const index = findById(teams, player.team_id);
+    console.log(index);
     if (index !== -1) {
         team.players.splice(index, 1);
     }
-
-    display();
 }
 
 

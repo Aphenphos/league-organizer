@@ -1,13 +1,13 @@
 import { getUser, signOut } from '../services/auth-service.js';
 import { protectPage } from '../utils.js';
 import createUser from '../components/User.js';
-import { addPlayer, getTeams, removePlayer, getPlayers } from '../services/teams-names.js';
-import { renderTeams, createPlayers } from '../components/RenderTeams.js';
+import { getTeams } from '../services/teams-names.js';
+import { renderTeams } from '../components/RenderTeams.js';
 // displays teams
 // State
 let user = null;
 let teams = [];
-let players = [];
+// let players = [];
 
 // Action Handlers
 async function handlePageLoad() {
@@ -15,32 +15,32 @@ async function handlePageLoad() {
     protectPage(user);
 
     teams = await getTeams();
-    players = await getPlayers();
+    // players = await getPlayers();
     console.log(teams);
 
     display();
 }
 
-async function handleAddPlayer(player, team) {
-    const playerToAdd = await addPlayer(player.name, team.id);
+// async function handleAddPlayer(player, team) {
+//     const playerToAdd = await addPlayer(player.name, team.id);
 
-    team = team.id;
-    team.players.push(playerToAdd);
-}
+//     team = team.id;
+//     team.players.push(playerToAdd);
+// }
 
-async function handleRemovePlayer(player) {
-    await removePlayer(player.id);
+// async function handleRemovePlayer(player) {
+//     await removePlayer(player.id);
 
-    const team = player.team_id;
+//     const team = player.team_id;
 
-    const index = team.players.indexOf(player);
+//     const index = team.players.indexOf(player);
 
-    if (index !== -1) {
-        team.players.splice(index, 1);
-    }
+//     if (index !== -1) {
+//         team.players.splice(index, 1);
+//     }
 
-    display();
-}
+//     display();
+// }
 
 
 async function handleSignOut() {
@@ -55,15 +55,15 @@ const User = createUser(
 
 const Teams = renderTeams(
     document.querySelector('#all-teams-container'),
-    { handleAddPlayer, handleRemovePlayer }
+    { }
 );
 
-const Players = createPlayers(document.getElementById('players'));
+// const Players = createPlayers(document.getElementById('players'));
 
 function display() {
     User({ user });
     Teams({ teams });
-    Players({ players });
+    // Players({ players });
 }
 
 handlePageLoad();
