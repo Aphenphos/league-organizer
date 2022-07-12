@@ -9,15 +9,16 @@ let user = null;
 let teams = [];
 
 const newTeamInput = document.querySelector('#new-team-input');
-
 // Action Handlers
 newTeamInput.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(newTeamInput);
     const newTeam = await addTeam(data.get('new-team-name'));
-
+    
+    newTeam.players = [];
+    
     teams.push(newTeam);
-
+    
     display();
 });
 
@@ -56,22 +57,17 @@ async function handleRemovePlayer(player) {
 
 async function handleRemoveTeam(team) {
     
-    for await (const player of team.players) {
-
+    for (const player of team.players) {
         await removePlayer(player.id);
-
-        const team = findById(teams, player.team_id);
-    
-        const index = team.players.indexOf(player);
-        if (index !== -1) {
-            team.players.splice(index, 1);
-        }
-    
     }
 
     await removeTeam(team.id);
+    
+    const teamIndex = teams.indexOf(team);
+    teams.splice(teamIndex, 1);
+
     console.log(teams);
-    await display();
+    display();
 }
 
 async function handleSignOut() {

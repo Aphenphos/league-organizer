@@ -3,29 +3,32 @@
 function Team({ team, handleRemoveTeam, handleAddPlayer, handleRemovePlayer }) {
     const li = document.createElement('li');
     li.classList.add('team-container');
-
     const button = document.createElement('button');
     button.classList.add('remove-team');
     button.textContent = 'Delete Team';
     button.addEventListener('click', () => {
         handleRemoveTeam(team);
-        console.log(team);
     });
     const h1 = document.createElement('h1');
     h1.textContent = team.name;
     h1.classList.add('team-name');
 
+    const form = AddPlayer({ team, handleAddPlayer });
+
     const ul = document.createElement('ul');
     ul.classList.add('team-player');
-    const form = AddPlayer({ team, handleAddPlayer });
-    if (team.players !== 1) { 
+    console.log(team.players[0]);
+    if (team.players[0] !== undefined) {
         for (const player of team.players) {
             const P = Player({ player, handleRemovePlayer });
             ul.append(P);
         }
+        li.append(button, h1, ul, form);
+        return li;
+    } else { 
+        li.append(button, h1, ul, form);
+        return li;
     }
-    li.append(button, h1, ul, form);
-    return li;
 }
 
 function Player({ player, handleRemovePlayer }) {

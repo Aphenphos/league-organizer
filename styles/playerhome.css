@@ -8,14 +8,18 @@
     grid-gap: 15px;
 }
 
+
 tr {
     /* margin: 15px; */
     display: flex;
     justify-content: space-between;
+    margin-top: 5px;
+    border: 1px solid black;
 }
 
 td {
     display: grid;
-    grid-gap: 15px;
+    grid-template-columns: auto auto;
+    grid-gap: 150px;
     justify-content: space-between;
 }
