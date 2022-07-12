@@ -19,7 +19,8 @@ export async function getTeamsWithPlayers() {
             name,
             players:player-table(
                 name,
-                id:playerID
+                playerID:id,
+                team_id
             )
         `);
     return response.data;
@@ -42,8 +43,8 @@ export async function addPlayer(player, team) {
     const response = await client
         .from('team-table')
         .insert({
-            name: player.name,
-            team_id: team
+            name:player.name,
+            team_id:team
         })
         .single();
 

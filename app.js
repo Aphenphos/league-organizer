@@ -1,7 +1,7 @@
 import { getUser, signOut } from './services/auth-service.js';
 import { protectPage } from './utils.js';
 import createUser from './components/User.js';
-import { addPlayer, getTeams, removePlayer } from './services/teams-names.js';
+import { addPlayer, getTeams, getTeamsWithPlayers, removePlayer } from './services/teams-names.js';
 import { renderTeams } from './components/RenderTeams.js';
 // displays teams
 // State
@@ -13,7 +13,7 @@ async function handlePageLoad() {
     user = getUser();
     protectPage(user);
 
-    teams = await getTeams();
+    teams = await getTeamsWithPlayers();
     console.log(teams);
 
     display();

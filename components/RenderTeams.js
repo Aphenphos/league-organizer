@@ -1,22 +1,22 @@
 
 
 function Team({ team, handleAddPlayer, handleRemovePlayer }) {
+    console.log(team);
     const li = document.createElement('li');
     li.classList.add('team-container');
 
     const h1 = document.createElement('h1');
     h1.textContent = team.name;
-
     const ul = document.createElement('ul');
     ul.classList.add('team-player');
+    const form = AddPlayer({ team, handleAddPlayer });
     for (const player of team.players) {
         const P = Player({ player, handleRemovePlayer });
         ul.append(P);
+        li.append(h1, ul, form);
     }
 
-    const form = AddPlayer({ team, handleAddPlayer });
-
-    li.append(h1, ul, form);
+    return li;
 }
 
 function Player({ player, handleRemovePlayer }) {
@@ -32,8 +32,10 @@ function Player({ player, handleRemovePlayer }) {
     button.addEventListener('click', () => {
         handleRemovePlayer(player);
     });
-
+    console.log(h1);
     li.append(h1, button);
+
+    return li;
 }
 
 function AddPlayer({ team, handleAddPlayer }) {
@@ -53,6 +55,7 @@ function AddPlayer({ team, handleAddPlayer }) {
         await handleAddPlayer(input.value, team.id);
         form.reset;
     });
+    return form;
 }
 
 
@@ -61,18 +64,17 @@ export function renderTeams(root,
         handleAddPlayer,
         handleRemovePlayer
     }) {
-
     return ({ teams }) => {
         root.innerHTML = '';
 
         for (const team of teams) {
+            console.log(team);
             const item = Team({
                 team,
                 handleAddPlayer,
                 handleRemovePlayer,
             });
             root.append(item);
-            console.log(team[teams]);
 
         }
     };

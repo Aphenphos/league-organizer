@@ -1,8 +1,8 @@
-import { getUser, signOut } from './services/auth-service.js';
-import { protectPage } from './utils.js';
-import createUser from './components/User.js';
-import { addPlayer, getTeams, removePlayer, getPlayers } from './services/teams-names.js';
-import { renderTeams } from './components/RenderTeams.js';
+import { getUser, signOut } from '../services/auth-service.js';
+import { protectPage } from '../utils.js';
+import createUser from '../components/User.js';
+import { addPlayer, getTeams, removePlayer, getPlayers } from '../services/teams-names.js';
+import { renderTeams, createPlayers } from '../components/RenderTeams.js';
 // displays teams
 // State
 let user = null;
@@ -58,12 +58,12 @@ const Teams = renderTeams(
     { handleAddPlayer, handleRemovePlayer }
 );
 
-const players
+const Players = createPlayers(document.getElementById('players'));
 
 function display() {
     User({ user });
     Teams({ teams });
-    players({})
+    Players({ players });
 }
 
 handlePageLoad();
