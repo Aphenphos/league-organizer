@@ -1,0 +1,25 @@
+#all-players-container {
+    display: grid;
+}
+
+#table-box {
+    display: grid;
+    justify-content: center;
+    grid-gap: 15px;
+}
+
+
+tr {
+    /* margin: 15px; */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    border: 1px solid black;
+}
+
+td {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 150px;
+    justify-content: space-between;
+}

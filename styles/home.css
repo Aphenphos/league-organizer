@@ -1,0 +1,48 @@
+#all-teams-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 6px;
+}
+
+.team-container {
+    gap: 5px;
+    display: grid;
+    border: 1px solid black;
+
+}
+
+.player {
+    display: grid;
+    grid-template-areas: 
+    'player-name delete-player';
+    text-align: center;
+}
+.player-name {
+    font-size: 1em;
+    font-weight: 500;
+    grid-area: player-name;
+}
+
+.deletePlayer {
+    background: white;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    grid-area: delete-player;
+    border: 1px solid red;
+}
+
+form {
+    width: 100%;
+}
+
+.text-input {
+    width: 100%;
+    text-align: center;
+}
+
+#new-team-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
