@@ -17,7 +17,6 @@ function Team({ team, handleRemoveTeam, handleAddPlayer, handleRemovePlayer }) {
 
     const ul = document.createElement('ul');
     ul.classList.add('team-player');
-    console.log(team.players[0]);
     if (team.players[0] !== undefined) {
         for (const player of team.players) {
             const P = Player({ player, handleRemovePlayer });

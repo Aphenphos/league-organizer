@@ -66,7 +66,6 @@ async function handleRemoveTeam(team) {
     const teamIndex = teams.indexOf(team);
     teams.splice(teamIndex, 1);
 
-    console.log(teams);
     display();
 }
 
