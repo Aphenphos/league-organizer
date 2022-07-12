@@ -19,23 +19,26 @@ async function handlePageLoad() {
     display();
 }
 
-async function handleAddPlayer(player, team) {
-    const playerToAdd = await addPlayer(player.name, team.id);
+async function handleAddPlayer(playerName, teamId) {
+    const playerToAdd = await addPlayer(playerName, teamId);
 
-    team = team.id;
+    const team = findById(teams, teamId);
     team.players.push(playerToAdd);
+
+    display();
 }
 
 async function handleRemovePlayer(player) {
     await removePlayer(player.id);
 
-    const team = (player.team_id);
+    const team = findById(teams, player.team_id);
 
-    const index = findById(teams, player.team_id);
-    console.log(index);
+    const index = team.players.indexOf(player);
     if (index !== -1) {
         team.players.splice(index, 1);
     }
+
+    display();
 }
 
 

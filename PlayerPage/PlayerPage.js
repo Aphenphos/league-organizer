@@ -1,22 +1,20 @@
 import { getUser, signOut } from '../services/auth-service.js';
 import { protectPage } from '../utils.js';
 import createUser from '../components/User.js';
-import { getTeams } from '../services/teams-names.js';
-import { renderTeams } from '../components/RenderTeams.js';
+import { getTeams, getPlayers, getPlayersWithTeams } from '../services/teams-names.js';
+import { createPlayers } from '../components/RenderPlayers.js';
 // displays teams
 // State
 let user = null;
-let teams = [];
-// let players = [];
+let players = [];
 
 // Action Handlers
 async function handlePageLoad() {
     user = getUser();
     protectPage(user);
 
-    teams = await getTeams();
-    // players = await getPlayers();
-    console.log(teams);
+    players = await getPlayersWithTeams();
+    console.log(players);
 
     display();
 }
@@ -53,17 +51,12 @@ const User = createUser(
     { handleSignOut }
 );
 
-const Teams = renderTeams(
-    document.querySelector('#all-teams-container'),
-    { }
-);
 
-// const Players = createPlayers(document.getElementById('players'));
+const Players = createPlayers(document.getElementById('players'));
 
 function display() {
     User({ user });
-    Teams({ teams });
-    // Players({ players });
+    Players({ players });
 }
 
 handlePageLoad();

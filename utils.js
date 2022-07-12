@@ -12,7 +12,8 @@ export function getAuthRedirect() {
 
 export function findById(list, id) {
     for (const item of list) {
-        if (item.id === id) return item;
+        if (item.id === id) 
+            return item;
     }
     return null;
 }

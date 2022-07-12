@@ -68,7 +68,6 @@ export function renderTeams(root,
         root.innerHTML = '';
 
         for (const team of teams) {
-            console.log(team);
             const item = Team({
                 team,
                 handleAddPlayer,

@@ -19,7 +19,7 @@ export async function getTeamsWithPlayers() {
             name,
             players:player-table(
                 name,
-                playerID:id,
+                id,
                 team_id
             )
         `);
@@ -39,23 +39,37 @@ export async function getPlayers() {
 
 }
 
-export async function addPlayer(player, team) {
+export async function getPlayersWithTeams() {
     const response = await client
-        .from('team-table')
+        .from('player-table')
+        .select(`
+        id,
+        name,
+        team_id
+        teams:team-table(
+            id,
+            name
+        )`);
+    return response.data;
+}
+
+export async function addPlayer(playerName, team_id) {
+    const response = await client
+        .from('player-table')
         .insert({
-            name:player.name,
-            team_id:team
+            name:playerName,
+            team_id
         })
         .single();
 
     return response.data;
 }
 
-export async function removePlayer(player) {
+export async function removePlayer(playerId) {
     const response = await client
         .from('player-table')
         .delete()
-        .eq('id', player)
+        .eq('id', playerId)
         .single();
 
     return response.data;

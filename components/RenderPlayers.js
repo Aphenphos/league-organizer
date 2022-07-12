@@ -1,4 +1,4 @@
-export default function createPlayers(tbody) {
+export function createPlayers(tbody) {
     return ({ players }) => {
         tbody.innerHTML = '';
 
@@ -18,7 +18,19 @@ function Player({ player }) {
     name.textContent = player.name;
 
     const team = document.createElement('td');
-    team.textContent = player.team.name;
+    team.textContent = player.teams_id;
+    console.log(player.team_id);
+
+    // you good
+    // it is showing data
+    // player id showed more data i believe
+    // i see what your sayingh
+    
+
+    //  saying their team ID is undefined
+    //yeah id is showing the actual players IDs not the teams IDs
+    // idk wh its not showing the teams ids
+    // oh I know why we need to make the one that shows players with teams 
     
 
     tablePlayerName.append(name, team);
