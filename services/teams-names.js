@@ -45,7 +45,7 @@ export async function getPlayersWithTeams() {
         .select(`
         id,
         name,
-        team_id
+        team_id,
         teams:team-table(
             id,
             name
@@ -70,6 +70,29 @@ export async function removePlayer(playerId) {
         .from('player-table')
         .delete()
         .eq('id', playerId)
+        .single();
+
+    return response.data;
+}
+
+
+export async function addTeam(teamName) {
+    const response = await client
+        .from('team-table')
+        .insert({
+            name:teamName
+        })
+        .single();
+
+    return response.data;
+}
+
+
+export async function removeTeam(teamID) {
+    const response = await client
+        .from('team-table')
+        .delete()
+        .eq('id', teamID)
         .single();
 
     return response.data;

@@ -1,10 +1,16 @@
 
 
-function Team({ team, handleAddPlayer, handleRemovePlayer }) {
-    console.log(team);
+function Team({ team, handleRemoveTeam, handleAddPlayer, handleRemovePlayer }) {
     const li = document.createElement('li');
     li.classList.add('team-container');
 
+    const button = document.createElement('button');
+    button.classList.add('remove-team');
+    button.textContent = 'Delete Team';
+    button.addEventListener('click', () => {
+        handleRemoveTeam(team);
+        console.log(team);
+    });
     const h1 = document.createElement('h1');
     h1.textContent = team.name;
     h1.classList.add('team-name');
@@ -12,12 +18,13 @@ function Team({ team, handleAddPlayer, handleRemovePlayer }) {
     const ul = document.createElement('ul');
     ul.classList.add('team-player');
     const form = AddPlayer({ team, handleAddPlayer });
-    for (const player of team.players) {
-        const P = Player({ player, handleRemovePlayer });
-        ul.append(P);
+    if (team.players !== 1) { 
+        for (const player of team.players) {
+            const P = Player({ player, handleRemovePlayer });
+            ul.append(P);
+        }
     }
-    
-    li.append(h1, ul, form);
+    li.append(button, h1, ul, form);
     return li;
 }
 
@@ -35,7 +42,6 @@ function Player({ player, handleRemovePlayer }) {
     button.addEventListener('click', () => {
         handleRemovePlayer(player);
     });
-    console.log(h1);
     li.append(h1, button);
 
     return li;
@@ -65,7 +71,8 @@ function AddPlayer({ team, handleAddPlayer }) {
 
 
 export function renderTeams(root,
-    {
+    {   
+        handleRemoveTeam,
         handleAddPlayer,
         handleRemovePlayer
     }) {
@@ -74,6 +81,7 @@ export function renderTeams(root,
 
         for (const team of teams) {
             const item = Team({
+                handleRemoveTeam,
                 team,
                 handleAddPlayer,
                 handleRemovePlayer,
